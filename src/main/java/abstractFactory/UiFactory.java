@@ -2,12 +2,15 @@ package abstractFactory;
 
 public abstract class UiFactory {
 
-    void createButton(String text) {
+    Button createButton(String text) {
+        return null;
     }
 
-    void createTextField(String text) {
+    TextField createTextField(String text) {
+        return null;
     }
 
-    void createCheckbox(String text) {
+    Checkbox createCheckbox(String text) {
+        return null;
     }
 }

@@ -10,4 +10,9 @@ public class ButtonB extends Button{
     public void display() {
         System.out.println(" ______\n| |__| |\n|  ()  |\n|______|\n"+text);
     }
+
+    @Override
+    public void setText(String newText) {
+        this.text = newText;
+    }
 }

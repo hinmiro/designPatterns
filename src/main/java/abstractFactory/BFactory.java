@@ -3,17 +3,17 @@ package abstractFactory;
 public class BFactory extends UiFactory {
 
     @Override
-    public void createButton(String text) {
-        new ButtonB(text).display();
+    public Button createButton(String text) {
+        return new ButtonB(text);
     }
 
     @Override
-    public void createCheckbox(String text) {
-        new CheckboxB(text).display();
+    public Checkbox createCheckbox(String text) {
+        return new CheckboxB(text);
     }
 
     @Override
-    public void createTextField(String text) {
-        new TextFieldB(text).display();
+    public TextField createTextField(String text) {
+        return new TextFieldB(text);
     }
 }

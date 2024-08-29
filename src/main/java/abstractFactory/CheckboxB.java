@@ -21,4 +21,9 @@ public class CheckboxB extends Checkbox {
                          | \\____(      )___) )___
                           \\______(_______;;; __;;;"""+text);
     }
+
+    @Override
+    public void setText(String newText) {
+        this.text = newText;
+    }
 }

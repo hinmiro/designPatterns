@@ -30,4 +30,9 @@ public class TextFieldB extends TextField {
                 " ___/ /   |       |       |\n" +
                 "|____/    c_c_c_C/ \\C_c_c_c\n"+text);
     }
+
+    @Override
+    public void setText(String newText) {
+        this.text = newText;
+    }
 }
