@@ -14,6 +14,10 @@ public class Player {
         return playerNumber;
     }
 
+    public void setBurps() {
+        burpTroll--;
+    }
+
 
     public void useTurnSkip() {
         hasSkippedTurn = true;

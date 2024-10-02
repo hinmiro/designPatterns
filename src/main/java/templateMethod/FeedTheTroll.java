@@ -89,11 +89,12 @@ public class FeedTheTroll extends Game {
 
 
     private void handleBurp(Player p) {
-        if (p.getBurpTroll() < 1) {
+        if (p.getBurpTroll() == 0) {
             System.out.println("Sorry you cannot burp troll anymore, instead you have fed it...");
             troll.feedTheTroll();
             return;
         }
+        p.setBurps();
         troll.burpMe();
     }
 }
