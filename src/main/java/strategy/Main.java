@@ -47,6 +47,13 @@ public class Main {
 
         System.out.println("Time it took to sort " + quickSortedNumbers.length + " numbers with quicksort: " + ((endTime - startTime) / 1_000_000.0) + " milliseconds.");
 
+        sortingHandler.setStrategy(new StalinSort());
+
+        startTime = System.nanoTime();
+        int[] stalinsNumbers = sortingHandler.initializeSorting(moreNumbers);
+        endTime = System.nanoTime();
+
+        System.out.println("Time it took to sort " + stalinsNumbers.length + " numbers with stalinsort: " + ((endTime - startTime) / 1_000_000.0) + " milliseconds.");
 
 
     }
