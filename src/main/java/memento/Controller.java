@@ -19,6 +19,7 @@ public class Controller {
     public void setOption(int optionNumber, int choice) {
         saveToHistory(history);
         model.setOption(optionNumber, choice);
+        undontHistory.clear();
     }
 
     public int getOption(int optionNumber) {
@@ -28,6 +29,7 @@ public class Controller {
     public void setIsSelected(boolean isSelected) {
         saveToHistory(history);
         model.setIsSelected(isSelected);
+        undontHistory.clear();
     }
 
     public boolean getIsSelected() {
@@ -46,10 +48,12 @@ public class Controller {
 
     public void undoNot() {
         if (!undontHistory.isEmpty()) {
-            System.out.println("Undoing your undoings!!!");
             IMemento previousState = undontHistory.removeLast();
+            saveToHistory(history);
             model.restoreState(previousState);
             gui.updateGui();
+        } else {
+            System.out.println("No redos left...");
         }
     }
 
