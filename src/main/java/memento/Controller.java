@@ -61,4 +61,14 @@ public class Controller {
         IMemento currentState = model.createMemento();
         history.add(currentState);
     }
+
+    public List<IMemento> getHistory() {
+        return history;
+    }
+
+    public void setState(IMemento memento) {
+        System.out.println("memento clicked");
+        model.restoreState(memento);
+        gui.updateGui();
+    }
 }

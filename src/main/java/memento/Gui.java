@@ -1,14 +1,22 @@
 package memento;
 
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.geometry.Insets;
 import javafx.scene.input.KeyCode;
+
+import java.util.List;
 
 public class Gui extends Application {
 
@@ -18,6 +26,7 @@ public class Gui extends Application {
     private ColorBox colorBox2;
     private ColorBox colorBox3;
     private CheckBox checkBox;
+    private ListView historyList;
 
     public void start(Stage stage) {
 
@@ -25,6 +34,8 @@ public class Gui extends Application {
 
         // Insets for margin and padding
         Insets insets = new Insets(10, 10, 10, 10);
+
+        Button historyButton = new Button("history");
 
         // Create three ColorBoxes
         colorBox1 = new ColorBox(1, controller);
@@ -49,8 +60,12 @@ public class Gui extends Application {
         Label labelY = new Label("Press Ctrl-Y to undo the last undo. (Because, why not?) :D");
         labelY.setPadding(insets);
 
+        AnchorPane anchorPane = new AnchorPane(historyButton);
+        AnchorPane.setRightAnchor(historyButton, 10.0);
+        anchorPane.setPadding(new Insets(0, 5, 2, 10));
+
         // create a VBox that contains the HBox and the CheckBox
-        VBox vBox = new VBox(hBox, checkBox, label, labelY);
+        VBox vBox = new VBox(hBox, checkBox, label, labelY, anchorPane);
         // call controller when the CheckBox is clicked
         checkBox.setOnAction(event -> {
             controller.setIsSelected(checkBox.isSelected());
@@ -70,6 +85,10 @@ public class Gui extends Application {
             }
         });
 
+        historyButton.setOnAction(evt -> {
+            openHistoryWindow();
+        });
+
 
         stage.setScene(scene);
         stage.setTitle("Memento Pattern Example");
@@ -82,5 +101,33 @@ public class Gui extends Application {
         colorBox2.setColor(controller.getOption(2));
         colorBox3.setColor(controller.getOption(3));
         checkBox.setSelected(controller.getIsSelected());
+    }
+
+    public void openHistoryWindow() {
+        Stage historyStage = new Stage();
+        historyStage.setTitle("History");
+
+        ObservableList<IMemento> historyItems = FXCollections.observableArrayList(controller.getHistory());
+
+        ListView<IMemento> historyListView = new ListView<>(historyItems);
+        if (historyItems.isEmpty()) {
+            historyListView.setPlaceholder(new Label("History is empty."));
+        }
+
+        historyListView.setCellFactory(lv -> {
+            MementoListCell cell = new MementoListCell();
+            cell.setOnMouseClicked(event -> {
+                if (!cell.isEmpty()) {
+                    controller.setState(cell.getItems());
+                }
+            });
+            return cell;
+        });
+
+
+        StackPane historyLayout = new StackPane(historyListView);
+        Scene historyScene = new Scene(historyLayout, 300, 200);
+        historyStage.setScene(historyScene);
+        historyStage.show();
     }
 }
