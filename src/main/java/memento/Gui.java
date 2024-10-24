@@ -46,9 +46,11 @@ public class Gui extends Application {
 
         Label label = new Label("Press Ctrl-Z to undo the last change.");
         label.setPadding(insets);
+        Label labelY = new Label("Press Ctrl-Y to undo the last undo. (Because, why not?) :D");
+        labelY.setPadding(insets);
 
         // create a VBox that contains the HBox and the CheckBox
-        VBox vBox = new VBox(hBox, checkBox, label);
+        VBox vBox = new VBox(hBox, checkBox, label, labelY);
         // call controller when the CheckBox is clicked
         checkBox.setOnAction(event -> {
             controller.setIsSelected(checkBox.isSelected());
@@ -61,6 +63,10 @@ public class Gui extends Application {
                 // Ctrl-Z: undo
                 System.out.println("Undo key combination pressed");
                 controller.undo();
+            }
+            if (event.isControlDown() && event.getCode() == KeyCode.Y) {
+                System.out.println("Do the undo for the undo :D");
+                controller.undoNot();
             }
         });
 
