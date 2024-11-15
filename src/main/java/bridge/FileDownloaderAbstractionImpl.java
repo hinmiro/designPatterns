@@ -17,4 +17,9 @@ public class FileDownloaderAbstractionImpl implements FileDownloaderAbstraction 
     public boolean store(File object) {
         return provider.storeFile(object);
     }
+
+    @Override
+    public void renameFile(String newName, File file) {
+        file.setName(newName);
+    }
 }

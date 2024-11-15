@@ -7,8 +7,13 @@ public class WindowsFileDownloadImplementor implements FileDownloadImplementor {
     }
 
     @Override
-    public boolean storeFile(Object object) {
+    public boolean storeFile(File file) {
         System.out.println("File downloaded successfully in WINDOWS !!");
         return true;
+    }
+
+    @Override
+    public void renameFile(String newName, File file) {
+        file.setName(newName);
     }
 }
