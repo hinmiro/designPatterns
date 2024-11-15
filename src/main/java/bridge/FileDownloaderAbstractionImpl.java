@@ -20,6 +20,6 @@ public class FileDownloaderAbstractionImpl implements FileDownloaderAbstraction 
 
     @Override
     public void renameFile(String newName, File file) {
-        file.setName(newName);
+        provider.renameFile(newName, file);
     }
 }
