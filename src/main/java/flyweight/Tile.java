@@ -1,8 +1,13 @@
 package flyweight;
 
+
+import javafx.scene.image.Image;
+
 public interface Tile {
 
     String getCharacter();
 
-    String getType();
+    TileType getType();
+
+    Image getTileImage();
 }

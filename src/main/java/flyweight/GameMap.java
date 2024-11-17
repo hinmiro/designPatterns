@@ -1,23 +1,31 @@
 package flyweight;
 
 
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
+
 public abstract class GameMap {
     Tile[][] tiles;
     int rows = 10;
     int columns = 10;
 
-    public GameMap() {
+    public GameMap(Canvas canvas) {
+        int tileSize = 80;
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+
         tiles = new Tile[rows][columns];
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
-                tiles[i][j] = createTile();
+                Tile tile = createTile();
+                Image img = TileGraphicFactory.getTileImage(tile.getType());
+                gc.drawImage(img, j * tileSize, i * tileSize, tileSize, tileSize);
+                tiles[i][j] = tile;
             }
         }
     }
 
-    Tile createTile() {
-        return null;
-    }
+    abstract Tile createTile();
 
     void display() {
         for (Tile[] tile : tiles) {
@@ -27,4 +35,5 @@ public abstract class GameMap {
             System.out.println();
         }
     }
+
 }

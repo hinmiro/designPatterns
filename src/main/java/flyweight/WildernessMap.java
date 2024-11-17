@@ -1,21 +1,27 @@
 package flyweight;
 
 
+import javafx.scene.canvas.Canvas;
+
 import java.util.Random;
 
 public class WildernessMap extends GameMap {
 
     static Random random = new Random();
-    static String[] wilderTileNames = {"swamp", "water", "forest"};
+    static TileType[] wilderTileNames = {TileType.SWAMP, TileType.WATER, TileType.FOREST};
+
+    public WildernessMap(Canvas canvas) {
+        super(canvas);
+    }
 
 
     @Override
     public Tile createTile() {
         int num = random.nextInt(wilderTileNames.length);
         return switch (wilderTileNames[num]) {
-            case "swamp" -> new SwampTile();
-            case "water" -> new WaterTile();
-            case "forest" -> new ForestTile();
+            case SWAMP -> new SwampTile();
+            case WATER -> new WaterTile();
+            case FOREST -> new ForestTile();
             default -> throw new IllegalArgumentException("Unknown map type");
         };
     }
