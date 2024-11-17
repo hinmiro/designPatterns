@@ -18,7 +18,7 @@ public class View extends Application {
         pane.getChildren().add(canvas);
 
 
-        map = new WildernessMap(canvas);
+        map = new CityMap(canvas);
 
         Scene scene = new Scene(pane,400,400);
         stage.setScene(scene);
