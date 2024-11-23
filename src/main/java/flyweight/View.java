@@ -20,7 +20,7 @@ public class View extends Application {
 
         map = new CityMap(canvas);
 
-        Scene scene = new Scene(pane,400,400);
+        Scene scene = new Scene(pane,600,600);
         stage.setScene(scene);
         stage.setTitle("Game Map");
         stage.show();
