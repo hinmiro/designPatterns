@@ -4,6 +4,6 @@ public class MoveCursorRightCommand {
 
     public Integer move(int col) {
         System.out.println("RIGHT!");
-        return col < 100 ? ++col : 100;
+        return col < 49 ? ++col : 49;
     }
 }

@@ -7,6 +7,8 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -29,11 +31,18 @@ public class Gui extends Application {
         cursorRight = new MoveCursorRightCommand();
         pixelCommand = new TogglePixelCommand();
 
+        AnchorPane anchorPane = new AnchorPane();
+
         Button generateCodeButton = new Button("Generate code");
         generateCodeButton.setOnAction(event -> handleGenerate(event));
 
         Button clear = new Button("Clear");
         clear.setOnAction(event -> handleClear(event));
+
+        AnchorPane.setLeftAnchor(clear, 10.0);
+        AnchorPane.setRightAnchor(generateCodeButton, 10.0);
+        anchorPane.getChildren().addAll(clear, generateCodeButton);
+
 
         Insets insets = new Insets(10.0, 10.0, 10.0, 10.0);
 
@@ -41,6 +50,10 @@ public class Gui extends Application {
         pane.setPadding(insets);
         pane.setHgap(1);
         pane.setVgap(1);
+
+        BorderPane borderPane = new BorderPane();
+        borderPane.setCenter(pane);
+        borderPane.setStyle("-fx-border-color: black; -fx-border-width: 1;");
 
         for (int i = 0; i < 50; i++) {
             for (int j = 0; j < 50; j++) {
@@ -53,8 +66,9 @@ public class Gui extends Application {
 
 
         VBox vBox = new VBox(10);
-        vBox.getChildren().addAll(pane, generateCodeButton, clear);
+        vBox.getChildren().addAll(borderPane, anchorPane);
         Scene scene = new Scene(vBox);
+        vBox.setPadding(insets);
 
         pixelCommand.highlight(pixels[currentRow][currentCol]);
 
@@ -98,8 +112,8 @@ public class Gui extends Application {
     public void handleGenerate(ActionEvent event) {
         System.out.println("\nPicture in code");
         System.out.println();
-        for (int i = 0; i < pixels.length-1; i++) {
-            for (int j = 0; j < pixels.length-1; j++) {
+        for (int i = 0; i < pixels.length - 1; i++) {
+            for (int j = 0; j < pixels.length - 1; j++) {
                 if (pixels[i][j].isOn()) {
                     System.out.print("1");
                 } else {
